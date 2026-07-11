@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>《中暑》电子场刊</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+:root {
+  --bg-paper: #E8E4E0;
+  --bg-warm: #F0EBE5;
+  --red-spiral: #8B2323;
+  --red-dark: #6B1A1A;
+  --yellow-text: #C4951A;
+  --yellow-bright: #D4A017;
+  --gray-text: #4A4540;
+  --gray-light: #8A8580;
+  --gray-shadow: #B5B0A8;
+  --black-ink: #2A2520;
+  --white-pure: #FAF8F5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-snap-type: y mandatory; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg-paper);
+  color: var(--gray-text);
+  overflow-x: hidden;
+}
+
+.programme {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 32px;
+  position: relative;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+/* ===== P1 COVER ===== */
+.cover-page {
+  background: var(--bg-paper);
+}
+
+.spiral-bg {
+  position: absolute;
+  top: -60px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: spiralPulse 10s ease-in-out infinite;
+}
+
+@keyframes spiralPulse {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.08) rotate(8deg); }
+}
+
+.spiral-bg svg { width: 100%; height: 100%; }
+
+.cover-tag {
+  font-size: 11px;
+  letter-spacing: 8px;
+  color: var(--red-spiral);
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.cover-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 80px;
+  font-weight: 900;
+  color: var(--yellow-text);
+  line-height: 1;
+  letter-spacing: 12px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.cover-title .char-1 { display: inline-block; animation: charFloat 4s ease-in-out infinite; }
+.cover-title .char-2 { display: inline-block; animation: charFloat 4s ease-in-out 0.6s infinite; }
+
+@keyframes charFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.cover-subtitle {
+  font-size: 14px;
+  color: var(--red-spiral);
+  margin-top: 24px;
+  letter-spacing: 4px;
+  font-weight: 500;
+}
+
+.cover-author {
+  margin-top: 56px;
+  font-size: 12px;
+  color: var(--gray-light);
+  letter-spacing: 3px;
+}
+
+.cover-scroll {
+  position: absolute;
+  bottom: 40px;
+  font-size: 11px;
+  color: var(--gray-light);
+  letter-spacing: 2px;
+  animation: bounceDown 2.5s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(10px); opacity: 0.8; }
+}
+
+/* ===== P2 CONCEPT ===== */
+.concept-page {
+  background: linear-gradient(180deg, var(--bg-paper) 0%, var(--bg-warm) 100%);
+}
+
+.brush-stroke {
+  position: absolute;
+  height: 6px;
+  background: var(--red-spiral);
+  opacity: 0.06;
+  border-radius: 3px;
+  transform: rotate(-20deg);
+}
+
+.brush-1 { top: 80px; right: 20px; width: 50px; }
+.brush-2 { top: 180px; left: 30px; width: 30px; transform: rotate(15deg); }
+.brush-3 { bottom: 120px; right: 40px; width: 40px; transform: rotate(-35deg); }
+
+.concept-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--red-spiral);
+  line-height: 2;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.concept-quote .highlight {
+  color: var(--yellow-text);
+  font-weight: 700;
+}
+
+.footprints {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0.25;
+  margin-top: 40px;
+}
+
+.footprint {
+  width: 8px;
+  height: 14px;
+  background: var(--gray-shadow);
+  border-radius: 50% 50% 40% 40%;
+  transform: rotate(-15deg);
+  animation: footprintFade 3s ease-in-out infinite;
+}
+
+.footprint:nth-child(2) { animation-delay: 0.3s; transform: rotate(15deg) translateY(-4px); }
+.footprint:nth-child(3) { animation-delay: 0.6s; transform: rotate(-15deg); }
+
+@keyframes footprintFade {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== P3 OPENING ===== */
+.opening-page {
+  background: var(--white-pure);
+}
+
+.big-number {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 140px;
+  font-weight: 900;
+  color: var(--red-spiral);
+  opacity: 0.06;
+  line-height: 1;
+  position: absolute;
+  top: 40px;
+  left: 24px;
+}
+
+.opening-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: var(--black-ink);
+  line-height: 1.9;
+  text-align: left;
+  padding-left: 20px;
+  border-left: 3px solid var(--yellow-text);
+  max-width: 300px;
+}
+
+.opening-detail {
+  font-size: 15px;
+  color: var(--gray-text);
+  line-height: 2.2;
+  max-width: 300px;
+  margin-top: 32px;
+  text-align: left;
+}
+
+.opening-detail em {
+  color: var(--yellow-text);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.side-label {
+  font-size: 12px;
+  color: var(--gray-light);
+  letter-spacing: 2px;
+  margin-top: 32px;
+}
+
+/* ===== P4 BURNING ===== */
+.burn-page {
+  background: var(--white-pure);
+}
+
+.stagger-line {
+  font-size: 19px;
+  color: var(--gray-text);
+  line-height: 2.6;
+  text-align: left;
+  width: 100%;
+  max-width: 300px;
+}
+
+.stagger-line:nth-child(2) { padding-left: 36px; }
+.stagger-line:nth-child(3) { padding-left: 72px; }
+
+/* ===== P5 DOCTOR ===== */
+.dialogue-page {
+  background: var(--bg-paper);
+}
+
+.dialogue-block {
+  max-width: 320px;
+  padding: 0 8px;
+}
+
+.dialogue-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  color: var(--black-ink);
+  line-height: 2.2;
+  font-weight: 500;
+}
+
+.dialogue-source {
+  font-size: 13px;
+  color: var(--gray-light);
+  margin-top: 24px;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* ===== P6 LIE ===== */
+.lie-page {
+  background: var(--white-pure);
+}
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(196,149,26,0.05) 0%, rgba(139,35,35,0.03) 100%);
+  border: 1px solid rgba(139,35,35,0.08);
+  border-radius: 12px;
+  padding: 40px 28px;
+  max-width: 340px;
+  text-align: center;
+  position: relative;
+}
+
+.highlight-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: var(--yellow-text);
+  border-radius: 0 0 2px 2px;
+}
+
+.highlight-box p {
+  font-size: 17px;
+  line-height: 2;
+  color: var(--gray-text);
+}
+
+.highlight-box strong {
+  color: var(--red-spiral);
+  font-weight: 600;
+}
+
+/* ===== P7 MERITOCRACY ===== */
+.merit-page {
+  background: var(--white-pure);
+}
+
+.keyword-tag {
+  display: inline-block;
+  background: rgba(139,35,35,0.07);
+  padding: 4px 12px;
+  border-radius: 4px;
+  color: var(--red-spiral);
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.merit-text {
+  font-size: 17px;
+  line-height: 2.4;
+  color: var(--gray-text);
+  max-width: 300px;
+  text-align: left;
+}
+
+/* ===== P8 PARENTS ===== */
+.parents-page {
+  background: var(--bg-paper);
+}
+
+.parents-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26px;
+  color: var(--red-spiral);
+  line-height: 1.8;
+  text-align: center;
+  max-width: 300px;
+}
+
+.parents-quote::before {
+  content: '"';
+  display: block;
+  font-size: 80px;
+  color: var(--red-spiral);
+  opacity: 0.08;
+  line-height: 0.6;
+  margin-bottom: 16px;
+}
+
+.parents-detail {
+  font-size: 15px;
+  color: var(--gray-text);
+  line-height: 2.2;
+  max-width: 300px;
+  margin-top: 32px;
+  text-align: center;
+}
+
+/* ===== P9 ROOFTOP ===== */
+.rooftop-page {
+  background: var(--white-pure);
+}
+
+.rooftop-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  color: var(--black-ink);
+  line-height: 2;
+  text-align: center;
+  max-width: 300px;
+}
+
+.rooftop-quote strong {
+  color: var(--red-spiral);
+  font-weight: 600;
+}
+
+/* ===== P10 MEET ===== */
+.meet-page {
+  background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-paper) 100%);
+}
+
+.meet-whisper {
+  font-size: 14px;
+  color: var(--gray-light);
+  font-style: italic;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+}
+
+.meet-dialogue {
+  max-width: 320px;
+  text-align: center;
+}
+
+.meet-dialogue .dialogue-text {
+  font-size: 20px;
+  color: var(--black-ink);
+  line-height: 2;
+}
+
+.meet-dialogue .dialogue-source {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ===== P11 GOLD ===== */
+.gold-page {
+  background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-paper) 100%);
+}
+
+.gold-dialogue {
+  max-width: 340px;
+  text-align: center;
+}
+
+.gold-dialogue .dialogue-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  color: var(--red-spiral);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.gold-dialogue .dialogue-source {
+  text-align: center;
+  margin-top: 28px;
+  color: var(--yellow-text);
+  font-size: 14px;
+}
+
+/* ===== P12 ENDING ===== */
+.ending-page {
+  background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-paper) 100%);
+}
+
+.diamond-divider {
+  width: 6px;
+  height: 6px;
+  background: var(--red-spiral);
+  opacity: 0.2;
+  transform: rotate(45deg);
+  margin-bottom: 40px;
+}
+
+.ending-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: var(--red-spiral);
+  line-height: 2;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.ending-question {
+  font-size: 20px;
+  color: var(--yellow-text);
+  font-weight: 600;
+  margin-bottom: 48px;
+}
+
+.ending-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--red-spiral);
+  margin-bottom: 20px;
+}
+
+.ending-lines {
+  font-size: 14px;
+  color: var(--gray-light);
+  line-height: 2.2;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .page { padding: 40px 24px; }
+  .cover-title { font-size: 64px; letter-spacing: 8px; }
+  .concept-quote { font-size: 20px; }
+  .big-number { font-size: 120px; }
+  .opening-text { font-size: 20px; }
+  .parents-quote { font-size: 22px; }
+  .gold-dialogue .dialogue-text { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="programme">
+
+  <!-- P1: COVER -->
+  <section class="page cover-page">
+    <div class="spiral-bg">
+      <svg viewBox="0 0 200 200">
+        <path d="M100,100 m-80,0 a80,80 0 1,0 160,0 a80,80 0 1,0 -160,0" fill="none" stroke="#8B2323" stroke-width="3" opacity="0.3"/>
+        <path d="M100,100 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0" fill="none" stroke="#8B2323" stroke-width="3" opacity="0.4"/>
+        <path d="M100,100 m-40,0 a40,40 0 1,0 80,0 a40,40 0 1,0 -80,0" fill="none" stroke="#8B2323" stroke-width="3" opacity="0.5"/>
+        <path d="M100,100 m-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" fill="none" stroke="#8B2323" stroke-width="3" opacity="0.6"/>
+        <circle cx="100" cy="100" r="6" fill="#8B2323" opacity="0.7"/>
+      </svg>
+    </div>
+    <div class="cover-tag">荒诞戏剧</div>
+    <h1 class="cover-title">
+      <span class="char-1">中</span><span class="char-2">暑</span>
+    </h1>
+    <div class="cover-subtitle">徐卓 戏剧作品</div>
+    <div class="cover-author">HEATSTROKE IN WINTER</div>
+    <div class="cover-scroll">&darr; 向上滑动</div>
+  </section>
+
+  <!-- P2: CONCEPT -->
+  <section class="page concept-page">
+    <div class="brush-stroke brush-1"></div>
+    <div class="brush-stroke brush-2"></div>
+    <div class="brush-stroke brush-3"></div>
+    <div class="concept-quote">
+      冬天不会中暑&mdash;&mdash;<br>
+      这是全世界告诉你的常识。<br>
+      但<span class="highlight">你的身体正在燃烧</span>，<br>
+      这只有你知道。
+    </div>
+    <div class="footprints">
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+    </div>
+  </section>
+
+  <!-- P3: OPENING -->
+  <section class="page opening-page">
+    <div class="big-number">11</div>
+    <div class="opening-text">
+      穿最正式的衬衫、毛衣、西裤、羽绒服，去第11场面试。
+    </div>
+    <div class="opening-detail">
+      大厅里密密麻麻全是人，全部都在打电话。<br><br>
+      太吵了，耳朵找不到一个重点。<br><br>
+      好渴，但不能喝水&mdash;&mdash;<em>面试的时候不能上厕所</em>。
+    </div>
+    <div class="side-label">你告诉自己：忍耐</div>
+  </section>
+
+  <!-- P4: BURNING -->
+  <section class="page burn-page">
+    <div class="stagger-line">可你明明在燃烧。</div>
+    <div class="stagger-line">由内而外的热，热到心里发慌，</div>
+    <div class="stagger-line">身体像炉子里的饼、开锅的水蒸气。</div>
+    <div class="footprints" style="margin-top: 48px;">
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+    </div>
+  </section>
+
+  <!-- P5: DOCTOR -->
+  <section class="page dialogue-page">
+    <div class="dialogue-block">
+      <div class="dialogue-text">
+        &ldquo;愿意加班，可以单休？&rdquo;<br><br>
+        你点了点头。<br><br>
+        &ldquo;人一旦自己剥削自己，<br>就真的没救了。&rdquo;
+      </div>
+      <div class="dialogue-source">&mdash;&mdash; 医生</div>
+    </div>
+  </section>
+
+  <!-- P6: LIE -->
+  <section class="page lie-page">
+    <div class="highlight-box">
+      <p><strong>我们生活在一个巨大的谎言里：</strong><br><br>当下的痛苦可以兑换未来的幸福。<br><br>就像驴子眼前栓住的胡萝卜，<br>始终和驴保持着距离。</p>
+    </div>
+  </section>
+
+  <!-- P7: MERITOCRACY -->
+  <section class="page merit-page">
+    <div class="keyword-tag">优绩主义</div>
+    <div class="merit-text">
+      是一台精密的跑步机&mdash;&mdash;<br><br>
+      你以为在奔跑，其实从未移动。<br><br>
+      你以隐忍牺牲换取认同，<br>
+      在无休止的自我证明中<br>
+      放逐了最真实的感知。
+    </div>
+  </section>
+
+  <!-- P8: PARENTS -->
+  <section class="page parents-page">
+    <div class="parents-quote">
+      &ldquo;心静自然凉。&rdquo;
+    </div>
+    <div class="parents-detail">
+      父母追上天台，反复拧开那盏小太阳。<br><br>
+      你拧掉，他们打开。<br>
+      你拧掉，他们打开。<br><br>
+      当你面前不是一扇玻璃窗，<br>
+      而是两颗爱你的心的时候，<br>
+      打碎它们，就变得异常困难。
+    </div>
+  </section>
+
+  <!-- P9: ROOFTOP -->
+  <section class="page rooftop-page">
+    <div class="rooftop-quote">
+      <strong>&ldquo;我保证我没有想跳楼，</strong><br><br>
+      其实我只是想凉快一下。&rdquo;
+    </div>
+    <div class="footprints" style="margin-top: 48px;">
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+    </div>
+  </section>
+
+  <!-- P10: MEET -->
+  <section class="page meet-page">
+    <div class="meet-whisper">直到你遇见她 &mdash; 那个麻花辫女孩</div>
+    <div class="meet-dialogue">
+      <div class="dialogue-text">
+        &ldquo;我那个时候&hellip;&hellip;<br>会不会也中暑了？&rdquo;
+      </div>
+      <div class="dialogue-source">&mdash;&mdash; 我</div>
+    </div>
+  </section>
+
+  <!-- P11: GOLD -->
+  <section class="page gold-page">
+    <div class="gold-dialogue">
+      <div class="dialogue-text">
+        &ldquo;我看出来了。&rdquo;
+      </div>
+      <div class="dialogue-source">&mdash;&mdash; 她</div>
+    </div>
+  </section>
+
+  <!-- P12: ENDING -->
+  <section class="page ending-page">
+    <div class="diamond-divider"></div>
+    <div class="ending-quote">
+      原来不止我一个人，<br>
+      会在冬天中暑。
+    </div>
+    <div class="ending-question">你呢？</div>
+    <div class="ending-title">《中暑》</div>
+    <div class="ending-lines">
+      写给每一个在寒冬里灼烧的灵魂<br><br>
+      最高的自由，是忠于自我的感知<br>
+      真正的治愈，是被包容地看见
+    </div>
+    <div class="footprints" style="margin-top: 48px;">
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
